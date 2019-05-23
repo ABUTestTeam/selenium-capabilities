@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ (C) Copyright 2018 Inmarsat plc. <https://www.inmarsat.com/>.
+  ~
+  ~ This software is for INTERNAL use only and must not be distributed.
+  ~
+  ~ File : unit-test-suite.xml
+  ~ Last Modified : 24/08/18 14:07
+  ~
+  -->
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="TestAutomationFrameworkTestSuite" parallel="false">
+
+    <test name="TestAutomationFrameworkUtilTests">
+        <classes>
+            <!-- automation.utils Tests -->
+            <class name="com.inmarsat.selenium.CustomCapabilitiesMatcherTest"/>
+
+        </classes>
+    </test>
+
+</suite>
