@@ -17,5 +17,8 @@ _It will be placed in the target folder_
 1. Start the hub with a the specific configuration
 
   ```
-    $ java -cp selenium-server-standalone-2.53.0.jar:target/custom-capability-matcher-1.0-SNAPSHOT.jar org.openqa.grid.selenium.GridLauncher -role hub -hubConfig src/main/resources/hubConfig.json
+    $ java -cp selenium-server-standalone-3.159.1.jar:target/selenium-capabilities-${version}.jar org.openqa.grid.selenium.GridLauncher -role hub -hubConfig src/main/resources/hubConfig.json
   ```
+  
+[Selenium Server](https://github.com/SeleniumHQ/selenium/tree/master/java/server/src/org/openqa/grid)
+  
