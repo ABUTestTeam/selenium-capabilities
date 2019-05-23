@@ -20,19 +20,28 @@ import java.util.Map;
 
 import static org.openqa.selenium.remote.CapabilityType.BROWSER_NAME;
 
+/**
+ * <p>Checks the "marionette" property, and matches to the boolean value. Specific option within the
+ * {@link org.openqa.selenium.firefox.FirefoxOptions} and {@link org.openqa.selenium.firefox.FirefoxDriver}.</p>
+ *
+ * <p>If {@link org.openqa.selenium.remote.CapabilityType#BROWSER_NAME} is not firefox, returns true by default.</p>
+ */
 public class FirefoxSpecificValidator implements Validator {
 
     @Override
-    public Boolean apply(Map<String, Object> providedCapabilities, Map<String, Object> requestedCapabilities) {
-        if (! "firefox".equals(requestedCapabilities.get(BROWSER_NAME))) {
+    public Boolean apply(Map<String, Object> providedCapabilities, Map<String, Object> desiredCapabilities) {
+
+        if (! "firefox".equals(desiredCapabilities.get(BROWSER_NAME))) {
             return true;
         }
 
-        if (requestedCapabilities.get("marionette") != null &&
-                !Boolean.valueOf(requestedCapabilities.get("marionette").toString())) {
+        if (desiredCapabilities.get("marionette") != null &&
+                !Boolean.valueOf(desiredCapabilities.get("marionette").toString())) {
+
             return providedCapabilities.get("marionette") != null &&
                     !Boolean.valueOf(providedCapabilities.get("marionette").toString());
         } else {
+
             return providedCapabilities.get("marionette") == null ||
                     Boolean.valueOf(providedCapabilities.get("marionette").toString());
         }

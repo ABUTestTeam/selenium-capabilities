@@ -18,12 +18,28 @@ package com.inmarsat.selenium;
 
 import com.google.common.collect.ImmutableSet;
 
+/**
+ * <p>A static helper class concerned with providing common methods without context.</p>
+ */
 public class CapabilityHelper {
 
     private CapabilityHelper(){
         // EMPTY
     }
 
+    /**
+     * <p>Will check the object for strings that denote that any parameter will do, the following ways are
+     * accepted:</p>
+     * <ul>
+     *     <li>""</li>
+     *     <li>"any"</li>
+     *     <li>"*"</li>
+     * </ul>
+     *
+     * @param requested the {@link org.openqa.selenium.remote.DesiredCapabilities} to check.
+     *
+     * @return true if "any", "", or "*".
+     */
     public static boolean anything(Object requested) {
         return requested == null ||
                 ImmutableSet.of("any", "", "*").contains(requested.toString().toLowerCase());

@@ -23,14 +23,26 @@ import java.util.Map;
 import static com.inmarsat.selenium.CapabilityHelper.anything;
 
 /**
+ * <p>Simple object comparison between things to consider.</p>
  *
+ * <p>Has the following filters:</p>
+ * <ul>
+ *     <li>1. Will not consider things starting with the Grid Token "_"</li>
+ *     <li>2. Will only consider things within the {@link #toConsider} list</li>
+ *     <li>3. Will pass through anything that is set to any</li>
+ * </ul>
+ *
+ * <p>It will compare anything directly that has passed through the filters above.</p>
  */
 public class SimplePropertyValidator implements Validator {
 
     private static final String GRID_TOKEN = "_";
 
-    private List<String> toConsider;
+    private final List<String> toConsider;
 
+    /**
+     * @param toConsider A list of tokens to consider for comparison.
+     */
     public SimplePropertyValidator(String... toConsider) {
         this.toConsider = Arrays.asList(toConsider);
     }

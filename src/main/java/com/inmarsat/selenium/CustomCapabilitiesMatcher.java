@@ -28,23 +28,20 @@ import java.util.Map;
 import static org.openqa.selenium.remote.CapabilityType.BROWSER_NAME;
 
 /**
- * Selenium Grid uses this class to match DesiredCapabilities to ActualCapabilities
+ * <p>A capabilities matcher based on the {@link org.openqa.grid.internal.utils.DefaultCapabilityMatcher}
+ * implementation by seleniumHQ. It compares the {@link org.openqa.selenium.Capabilities} of the grid to
+ * the {@link org.openqa.selenium.remote.DesiredCapabilities} requested. If the capabilities of both match
+ * then it returns true and the node information will be returned by grid.</p>
  *
- * Can either extend DefaultCapabilityMatcher or implement CapabilityMather
+ * <p>The {@link org.openqa.grid.internal.utils.DefaultCapabilityMatcher} and hence this class follow the
+ * {@link Validator} pattern. The following validators are registered in this capabilities matcher:</p>
  *
- * Sub-interface Validator (extends BiFunction\<Map, Map\>) could be useful as it ensures you call Apply
- *
- * In DefaultCapabilityMatcher there is an anything(requested) value for genericity, could use...
- * if(anything(requested)) return true;
- *
- * Currently in DefaultCapabilityMatcher you have the following:
  * <ul>
- *     <li>PlatformValidator</li>
- *     <li>AliasedPropertyValidator(Browser)</li>
- *     <li>AliasedPropertyValidator(Version)</li>
- *     <li>SimplePropertyValidator(App Name)</li>
- *     <li>Firefox validator</li>
- *     <li>Safari validator</li>
+ *     <li>{@link AliasedPropertyValidator#AliasedPropertyValidator(String...)}</li>
+ *     <li>{@link FirefoxSpecificValidator}</li>
+ *     <li>{@link PlatformValidator}</li>
+ *     <li>{@link SafariSpecificValidator}</li>
+ *     <li>{@link SimplePropertyValidator#SimplePropertyValidator(String...)}</li>
  * </ul>
  *
  * They are implementing validators (private final),,, rebuild based on work done by selenium
@@ -65,14 +62,19 @@ public class CustomCapabilitiesMatcher implements CapabilityMatcher {
     }
 
     /**
-     * This is the called function by the Grid.
+     * ENTRY POINT
      *
-     * @param providedCapabilities the Capabilities provided by the grid
-     * @param requestedCapabilities  the DesiredCapabilities provided by the framework
-     * @return true if matches, false if not, will work off first one.
+     * <p>This is the called function by the Grid.</p>
+     *
+     * @param providedCapabilities the {@link org.openqa.selenium.Capabilities} provided by the grid
+     * @param requestedCapabilities  the {@link org.openqa.selenium.remote.DesiredCapabilities} provided externally
+     *
+     * @return true if matches, false if not, will work off first one. The provided and requested capabilities cannot
+     * be null.
      */
     @Override
     public boolean matches(Map<String, Object> providedCapabilities, Map<String, Object> requestedCapabilities) {
+
         return providedCapabilities != null && requestedCapabilities != null
                 && validators.stream().allMatch(v -> v.apply(providedCapabilities, requestedCapabilities));
     }

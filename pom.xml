@@ -3,9 +3,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <disableTests>false</disableTests>
     </properties>
-
 
     <modelVersion>4.0.0</modelVersion>
 

@@ -23,21 +23,34 @@ import java.util.stream.Stream;
 import static com.inmarsat.selenium.CapabilityHelper.anything;
 
 /**
- * Compares a list of properties and values, and if one in the list matches then it returns true
+ * <p>When provided with one {@link #propertyAliases}, this will work the same as the
+ * {@link SimplePropertyValidator}.</p>
+ *
+ * <p>When more than one {@link #propertyAliases} have been defined, then when matching capabilities
+ * - if one of the properties match then the {@link #apply(Map, Map)} function will return true.</p>
+ *
+ * <p>If none of the properties in {@link #propertyAliases} match, then it will return false.</p>
+ *
+ * <p>This does not account for if you have set one of {@link #propertyAliases} to "any", then it will potentially
+ * ignore other {@link #propertyAliases} defined depending on the order of definition.</p>
  */
 public class AliasedPropertyValidator implements Validator {
 
-    private String[] propertyAliases;
+    // The aliases to attempt to match against
+    private final String[] propertyAliases;
 
+    /**
+     * @param propertyAliases the "keys" to attempt to match in the order that they are defined by implementation.
+     */
     public AliasedPropertyValidator(String... propertyAliases){
         this.propertyAliases = propertyAliases;
     }
 
     @Override
-    public Boolean apply(Map<String, Object> providedCapabilities, Map<String, Object> requestedCapabilities) {
+    public Boolean apply(Map<String, Object> providedCapabilities, Map<String, Object> desiredCapabilities) {
 
         Object requested = Stream.of(propertyAliases)
-                .map(requestedCapabilities::get)
+                .map(desiredCapabilities::get)
                 .filter(Objects::nonNull)
                 .findFirst()
                 .orElse(null);

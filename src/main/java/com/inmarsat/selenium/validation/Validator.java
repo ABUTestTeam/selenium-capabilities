@@ -19,6 +19,22 @@ package com.inmarsat.selenium.validation;
 import java.util.Map;
 import java.util.function.BiFunction;
 
+/**
+ * <p>To fit the validator pattern implemented in {@link com.inmarsat.selenium.CustomCapabilitiesMatcher},
+ * all validation methods much implement the {@link #apply(Map, Map)} function.</p>
+ */
 public interface Validator extends BiFunction<Map<String, Object>, Map<String, Object>, Boolean> {
-    // void implementation
+
+    /**
+     * <p>This function originates from {@link BiFunction}.</p>
+     *
+     * @param providedCapabilities The {@link org.openqa.selenium.Capabilities} of each of the nodes on the Grid where
+     *                             the capability matcher is running.
+     * @param desiredCapabilities The {@link org.openqa.selenium.remote.DesiredCapabilities} sent to the grid
+     *
+     * @return true if the providedCapabilities match the desiredCapabilities.
+     */
+    @Override
+    Boolean apply(Map<String, Object> providedCapabilities, Map<String, Object> desiredCapabilities);
+
 }

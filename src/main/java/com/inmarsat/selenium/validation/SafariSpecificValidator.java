@@ -23,17 +23,30 @@ import java.util.Map;
 
 import static org.openqa.selenium.remote.CapabilityType.BROWSER_NAME;
 
+/**
+ * <p>Compared specific options from the {@link SafariOptions} specifically for the
+ * {@link org.openqa.selenium.safari.SafariDriver}. It compares the following:</p>
+ * <ul>
+ *     <li>Automatic Inspection</li>
+ *     <li>Automatic Profiling</li>
+ *     <li>Use Technology Preview</li>
+ * </ul>
+ *
+ * <p>In the {@link org.openqa.selenium.remote.CapabilityType#BROWSER_NAME} is not "safari" or
+ * "Safari Technology Preview" then it will return true.</p>
+ */
 public class SafariSpecificValidator implements Validator {
 
     @Override
-    public Boolean apply(Map<String, Object> providedCapabilities, Map<String, Object> requestedCapabilities) {
-        if (!"safari".equals(requestedCapabilities.get(BROWSER_NAME)) &&
-                !"Safari Technology Preview".equals(requestedCapabilities.get(BROWSER_NAME))) {
+    public Boolean apply(Map<String, Object> providedCapabilities, Map<String, Object> desiredCapabilities) {
+
+        if (!"safari".equals(desiredCapabilities.get(BROWSER_NAME)) &&
+                !"Safari Technology Preview".equals(desiredCapabilities.get(BROWSER_NAME))) {
             return true;
         }
 
         SafariOptions providedOptions = new SafariOptions(new ImmutableCapabilities(providedCapabilities));
-        SafariOptions requestedOptions = new SafariOptions(new ImmutableCapabilities(requestedCapabilities));
+        SafariOptions requestedOptions = new SafariOptions(new ImmutableCapabilities(desiredCapabilities));
 
         return requestedOptions.getAutomaticInspection() == providedOptions.getAutomaticInspection() &&
                 requestedOptions.getAutomaticProfiling() == providedOptions.getAutomaticProfiling() &&

@@ -26,15 +26,26 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * Compares platforms
+ * <p>Compares the platform fields in the provided and desired capabilities. This can match the platform version if
+ * defined within the platform field (i.e. platform=Win7. However on deprecation of this, the preferred approach
+ * would be platformName=Windows, platformVersion=7.</p>
+ * TODO check above statement about preferred approach
+ *
+ * <p>The {@link #extractPlatform(Object)} extracts the core platform from the provided string. See {@link Platform}
+ *  for more details about how this is done.</p>
+ *
+ * <br>
+ *
+ * <p>NOTE: The implementation of this will need to be changed with 4.0.0 when PLATFORM is removed from grid. It
+ * will be replaces with PLATFORM_NAME.</p>
  */
 public class PlatformValidator implements Validator {
 
     @Override
-    public Boolean apply(Map<String, Object> providedCapabilities, Map<String, Object> requestedCapabilities) {
+    public Boolean apply(Map<String, Object> providedCapabilities, Map<String, Object> desiredCapabilities) {
 
-        Object requested = Optional.ofNullable(requestedCapabilities.get(CapabilityType.PLATFORM))
-                .orElse(requestedCapabilities.get(CapabilityType.PLATFORM_NAME));
+        Object requested = Optional.ofNullable(desiredCapabilities.get(CapabilityType.PLATFORM))
+                .orElse(desiredCapabilities.get(CapabilityType.PLATFORM_NAME));
 
         if (CapabilityHelper.anything(requested)) {
             return true;
@@ -53,6 +64,14 @@ public class PlatformValidator implements Validator {
         return provided != null && Objects.equals(requested.toString(), provided.toString());
     }
 
+    /**
+     * <p>Extracts the platform string from {@link Platform#fromString(String)} to make it comparable.</p>
+     *
+     * @param o the object to extract from, given by either the {@link org.openqa.selenium.Capabilities} or
+     *          {@link org.openqa.selenium.remote.DesiredCapabilities}.
+     *
+     * @return the parsed version of the {@link Platform} for comparison.
+     */
     private Platform extractPlatform(Object o) {
 
         if (o == null) {
