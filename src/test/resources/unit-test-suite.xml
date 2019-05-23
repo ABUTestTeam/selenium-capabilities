@@ -13,10 +13,21 @@
 
     <test name="TestAutomationFrameworkUtilTests">
         <classes>
-            <!-- automation.utils Tests -->
+
             <class name="com.inmarsat.selenium.CustomCapabilitiesMatcherTest"/>
+
+            <class name="com.inmarsat.selenium.CapabilityHelperTest"/>
+
+            <class name="com.inmarsat.selenium.validation.AliasedPropertyValidatorTest"/>
+
+            <class name="com.inmarsat.selenium.validation.FirefoxSpecificValidatorTest"/>
+
+            <class name="com.inmarsat.selenium.validation.PlatformValidatorTest"/>
+
+            <class name="com.inmarsat.selenium.validation.SafariSpecificValidatorTest"/>
+
+            <class name="com.inmarsat.selenium.validation.SimplePropertyValidatorTest"/>
 
         </classes>
     </test>
-
 </suite>

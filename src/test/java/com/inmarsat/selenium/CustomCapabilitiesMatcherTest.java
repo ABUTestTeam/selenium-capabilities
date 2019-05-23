@@ -42,18 +42,21 @@ public class CustomCapabilitiesMatcherTest {
 
     @Test
     public void smokeTest() {
+
         Map<String, Object> firefox = ImmutableMap.of(
                 CapabilityType.BROWSER_NAME, "B",
                 CapabilityType.PLATFORM_NAME, "XP");
-        Map<String, Object> tl = new HashMap<String, Object>() {{
-            put(CapabilityType.APPLICATION_NAME, "A");
-            put(CapabilityType.VERSION, null);
-        }};
+
+        Map<String, Object> tl = new HashMap<>();
+
+        tl.put(CapabilityType.APPLICATION_NAME, "A");
+        tl.put(CapabilityType.VERSION, null);
 
         Map<String, Object> firefox2 = ImmutableMap.of(
                 CapabilityType.BROWSER_NAME, "B",
                 CapabilityType.PLATFORM_NAME, "win7",
                 CapabilityType.VERSION, "3.6");
+
         Map<String, Object> tl2 = ImmutableMap.of(
                 CapabilityType.APPLICATION_NAME, "A",
                 CapabilityType.VERSION, "8.5.100.7");
