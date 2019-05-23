@@ -1,4 +1,4 @@
 capabilities.iml
 .idea/*
 target/*
-!.idea/copyright/*
+!.idea/copyright*

@@ -1,0 +1,7 @@
+<component name="CopyrightManager">
+    <copyright>
+        <option name="allowReplaceRegexp" value="Inmarsat" />
+        <option name="notice" value="(C) Copyright &amp;#36;today.year Inmarsat plc. &lt;https://www.inmarsat.com/&gt;.&#10;&#10;This software is for INTERNAL use only and must not be distributed.&#10;&#10;File : &amp;#36;file.fileName&#10;Last Modified : &amp;#36;file.lastModified&#10;" />
+        <option name="myName" value="BoilerplateCopyright" />
+    </copyright>
+</component>
