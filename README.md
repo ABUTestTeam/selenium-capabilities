@@ -1,24 +1,26 @@
-# Custom Capability Matcher
-Example that shows how to implement a Selenium Grid capability matcher, implementation of a tutorial that can be
-found [here](https://rationaleemotions.wordpress.com/2014/01/19/working-with-a-custom-capability-matcher-in-the-grid/).
+# Inmarsat's Custom Capability Matcher
+[![Inmarsat Logo](https://spacenews.com/wp-content/uploads/2014/11/InmarsatLogo_Inmarsat4X3-879x485.jpg)](https://www.inmarsat.com)
 
-## How to generate the jar
-_It will be placed in the target folder_
-```
-    $ mvn -DskipTests=true package
-```
+## Prerequisites
+- Java Development Kit 11
+- Maven 3
 
-## Steps to start the grid
+## Building the project
+```
+$ mvn clean install -DbuildNumber=0
+```
+_This will produce a jar in `${user.home}/.m2/repository/com/inmarsat/selenium-capabilities/${build.version}\"`._
+
+## To use the CustomCapabilitiesMatcher
+
 1. Download Selenium Server
 
   ```
     $ wget http://selenium-release.storage.googleapis.com/2.53/selenium-server-standalone-2.53.0.jar
   ```
-1. Start the hub with a the specific configuration
+2. Start the hub with a the specific configuration
 
   ```
-    $ java -cp selenium-server-standalone-3.159.1.jar:target/selenium-capabilities-${version}.jar org.openqa.grid.selenium.GridLauncher -role hub -hubConfig src/main/resources/hubConfig.json
+    $ java -cp /path/to/selenium-server-standalone-3.159.1.jar:/path/to/selenium-capabilities-${build.version}.jar org.openqa.grid.selenium.GridLauncher -role hub -hubConfig hubConfig.json
   ```
-  
-[Selenium Server](https://github.com/SeleniumHQ/selenium/tree/master/java/server/src/org/openqa/grid)
-  
+   

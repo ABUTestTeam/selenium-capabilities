@@ -1,20 +1,19 @@
-// Licensed to the Software Freedom Conservancy (SFC) under one
-// or more contributor license agreements.  See the NOTICE file
-// distributed with this work for additional information
-// regarding copyright ownership.  The SFC licenses this file
-// to you under the Apache License, Version 2.0 (the
-// "License"); you may not use this file except in compliance
-// with the License.  You may obtain a copy of the License at
-//
-//   http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing,
-// software distributed under the License is distributed on an
-// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-// KIND, either express or implied.  See the License for the
-// specific language governing permissions and limitations
-// under the License.
-
+/*
+ * Copyright 2019 Software Freedom Conservancy (SFC)
+ * Modifications copyright (C) 2019 Inmarsat plc
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.inmarsat.selenium;
 
 
@@ -35,10 +34,48 @@ import static org.testng.Assert.assertTrue;
 
 /**
  * Unit test for simple App.
+ * PLATFORM is deprecated but tests exist
  */
 public class CustomCapabilitiesMatcherTest {
 
     private CustomCapabilitiesMatcher matcher = new CustomCapabilitiesMatcher();
+
+    @Test
+    public void smokeTestWithDeprecatedPlatformCapability() {
+
+        Map<String, Object> firefox = ImmutableMap.of(
+                CapabilityType.BROWSER_NAME, "B",
+                CapabilityType.PLATFORM, "XP");
+
+        Map<String, Object> tl = new HashMap<>();
+        tl.put(CapabilityType.APPLICATION_NAME, "A");
+        tl.put(CapabilityType.VERSION, null);
+
+        Map<String, Object> firefox2 = ImmutableMap.of(
+                CapabilityType.BROWSER_NAME, "B",
+                CapabilityType.PLATFORM, "win7",
+                CapabilityType.VERSION, "3.6");
+
+        Map<String, Object> tl2 = ImmutableMap.of(
+                CapabilityType.APPLICATION_NAME, "A",
+                CapabilityType.VERSION, "8.5.100.7");
+
+
+        assertTrue(matcher.matches(tl, tl));
+        assertFalse(matcher.matches(tl, tl2));
+        assertTrue(matcher.matches(tl2, tl));
+        assertTrue(matcher.matches(tl2, tl2));
+
+        assertTrue(matcher.matches(firefox, firefox));
+        assertFalse(matcher.matches(firefox, firefox2));
+        assertFalse(matcher.matches(firefox2, firefox));
+        assertTrue(matcher.matches(firefox2, firefox2));
+
+        assertFalse(matcher.matches(tl, null));
+        assertFalse(matcher.matches(null, null));
+        assertFalse(matcher.matches(tl, firefox));
+        assertFalse(matcher.matches(firefox, tl2));
+    }
 
     @Test
     public void smokeTest() {
@@ -51,6 +88,7 @@ public class CustomCapabilitiesMatcherTest {
 
         tl.put(CapabilityType.APPLICATION_NAME, "A");
         tl.put(CapabilityType.VERSION, null);
+
 
         Map<String, Object> firefox2 = ImmutableMap.of(
                 CapabilityType.BROWSER_NAME, "B",
@@ -77,7 +115,6 @@ public class CustomCapabilitiesMatcherTest {
         assertFalse(matcher.matches(firefox, tl2));
     }
 
-    // TODO remove test when CapabilityType.PLATFORM is removed from code base
     @Test
     public void genericPlatformMatchingTestWithDeprecatedPlatformCapability() {
         Map<String, Object> requested = ImmutableMap.of(CapabilityType.PLATFORM, Platform.WINDOWS);
@@ -102,7 +139,6 @@ public class CustomCapabilitiesMatcherTest {
         assertFalse(matcher.matches(ImmutableMap.of(CapabilityType.PLATFORM_NAME, "linux"), requested));
     }
 
-    // TODO remove test when CapabilityType.PLATFORM is removed from code base
     @Test
     public void specificPlatformMatchingTestWithDeprecatedPlatformCapability() {
         Map<String, Object> requested = ImmutableMap.of(CapabilityType.PLATFORM, Platform.XP);
@@ -129,7 +165,6 @@ public class CustomCapabilitiesMatcherTest {
         assertFalse(matcher.matches(ImmutableMap.of(CapabilityType.PLATFORM_NAME, "linux"), requested));
     }
 
-    // TODO remove test when CapabilityType.PLATFORM is removed from code base
     @Test
     public void unknownPlatformMatchingTestWithDeprecatedPlatformCapability() {
         Map<String, Object> requested = ImmutableMap.of(CapabilityType.PLATFORM, "ms-dos");
@@ -150,15 +185,6 @@ public class CustomCapabilitiesMatcherTest {
         assertFalse(matcher.matches(ImmutableMap.of(CapabilityType.PLATFORM_NAME, "PS/2"), requested));
     }
 
-    @Test
-    public void canAddAttributeMatcher() {
-        matcher.addToConsider("my:capability");
-        Map<String, Object> requested = ImmutableMap.of("my:capability", "cheese");
-        assertTrue(matcher.matches(ImmutableMap.of("my:capability", "cheese"), requested));
-        assertFalse(matcher.matches(ImmutableMap.of("my:capability", "milk"), requested));
-    }
-
-    // TODO remove test when CapabilityType.PLATFORM is removed from code base
     @Test
     public void nullEmptyValuesWithDeprecatedPlatformCapability() {
         Map<String, Object> requested = new HashMap<>();
@@ -242,7 +268,6 @@ public class CustomCapabilitiesMatcherTest {
         assertTrue(matcher.matches(mNode, requested));
     }
 
-    // TODO remove test when CapabilityType.PLATFORM is removed from code base
     @Test
     public void shouldMatchSafariTechnologyPreviewOnlyWithDeprecatedPlatformCapability() {
         Map<String, Object> requested = new SafariOptions().setUseTechnologyPreview(true).asMap();
@@ -277,7 +302,6 @@ public class CustomCapabilitiesMatcherTest {
         assertFalse(matcher.matches(regularNode, requested));
     }
 
-    // TODO remove test when CapabilityType.PLATFORM is removed from code base
     @Test
     public void shouldMatchRegularSafariOnlyWithDeprecatedPlatformCapability() {
         Map<String, Object> requested = new SafariOptions().asMap();
@@ -310,7 +334,6 @@ public class CustomCapabilitiesMatcherTest {
         assertTrue(matcher.matches(regularNode, requested));
     }
 
-    // TODO remove test when CapabilityType.PLATFORM is removed from code base
     @Test
     public void shouldMatchWhenRequestedHasDeprecatedPlatformCapability() {
         Map<String, Object> requested = new FirefoxOptions().asMap();
@@ -323,7 +346,6 @@ public class CustomCapabilitiesMatcherTest {
         assertTrue(matcher.matches(node, requested));
     }
 
-    // TODO remove test when CapabilityType.PLATFORM is removed from code base
     @Test
     public void shouldMatchWhenNodeHasDeprecatedPlatformCapability() {
         Map<String, Object> requested = new FirefoxOptions().asMap();

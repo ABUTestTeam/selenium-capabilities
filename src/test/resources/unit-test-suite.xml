@@ -9,9 +9,9 @@
   ~
   -->
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="TestAutomationFrameworkTestSuite" parallel="false">
+<suite name="Capabilities Matching Test Suite" parallel="false">
 
-    <test name="TestAutomationFrameworkUtilTests">
+    <test name="Custom Capabilities Matching Tests">
         <classes>
 
             <class name="com.inmarsat.selenium.CustomCapabilitiesMatcherTest"/>
