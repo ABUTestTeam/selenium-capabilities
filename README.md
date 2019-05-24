@@ -3,7 +3,6 @@
 
 ## Prerequisites
 - Java Development Kit 11
-- Maven 3
 
 ## Building the project
 ```
@@ -37,9 +36,13 @@ _This will produce a jar in `${user.home}/.m2/repository/com/inmarsat/selenium-c
  it can however be used in the traditional way, where platformName can contain the version. However, the version 
  is no longer tied to the browserVersion as before.
  
+ Added Features:
+ * Handles versions by making them well-formatted "version 2183.123.2" is eq to "2183.123".
+
  Breaking changes between DefaultCapabilityMatcher and CustomCapabilityMatcher:
  * "version" no longer refers to browserVersion and is instead used for platform version separation.
  * version and browserVersion are matched to \<Major\>.\<Minor\> version schema for capability matching 
     * 7 -> 7.0
     * 7.1 -> 7.1
     * 7.0.1 -> 7.0
+ * Removed CapabilityType.PLATFORM from the validator and associated tests as it is deprecated.

@@ -33,6 +33,8 @@ import static org.openqa.selenium.remote.CapabilityType.BROWSER_NAME;
  * the {@link org.openqa.selenium.remote.DesiredCapabilities} requested. If the capabilities of both match
  * then it returns true and the node information will be returned by grid.</p>
  *
+ * <p>Things are currently case sensitive.</p>
+ *
  * <p>The {@link org.openqa.grid.internal.utils.DefaultCapabilityMatcher} and hence this class follow the
  * {@link Validator} pattern. The following validators are registered in this capabilities matcher:</p>
  *
@@ -78,5 +80,4 @@ public class CustomCapabilitiesMatcher implements CapabilityMatcher {
         return providedCapabilities != null && requestedCapabilities != null
                 && validators.stream().allMatch(v -> v.apply(providedCapabilities, requestedCapabilities));
     }
-
 }

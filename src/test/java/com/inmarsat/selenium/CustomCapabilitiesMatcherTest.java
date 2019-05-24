@@ -32,50 +32,9 @@ import java.util.Map;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
-/**
- * Unit test for simple App.
- * PLATFORM is deprecated but tests exist
- */
 public class CustomCapabilitiesMatcherTest {
 
     private CustomCapabilitiesMatcher matcher = new CustomCapabilitiesMatcher();
-
-    @Test
-    public void smokeTestWithDeprecatedPlatformCapability() {
-
-        Map<String, Object> firefox = ImmutableMap.of(
-                CapabilityType.BROWSER_NAME, "B",
-                CapabilityType.PLATFORM_NAME, "XP");
-
-        Map<String, Object> tl = new HashMap<>();
-        tl.put(CapabilityType.APPLICATION_NAME, "A");
-        tl.put(CapabilityType.VERSION, null);
-
-        Map<String, Object> firefox2 = ImmutableMap.of(
-                CapabilityType.BROWSER_NAME, "B",
-                CapabilityType.PLATFORM_NAME, "win7",
-                CapabilityType.VERSION, "3.6");
-
-        Map<String, Object> tl2 = ImmutableMap.of(
-                CapabilityType.APPLICATION_NAME, "A",
-                CapabilityType.VERSION, "8.5.100.7");
-
-
-        assertTrue(matcher.matches(tl, tl));
-        assertFalse(matcher.matches(tl, tl2));
-        assertTrue(matcher.matches(tl2, tl));
-        assertTrue(matcher.matches(tl2, tl2));
-
-        assertTrue(matcher.matches(firefox, firefox));
-        assertFalse(matcher.matches(firefox, firefox2));
-        assertFalse(matcher.matches(firefox2, firefox));
-        assertTrue(matcher.matches(firefox2, firefox2));
-
-        assertFalse(matcher.matches(tl, null));
-        assertFalse(matcher.matches(null, null));
-        assertFalse(matcher.matches(tl, firefox));
-        assertFalse(matcher.matches(firefox, tl2));
-    }
 
     @Test
     public void smokeTest() {
@@ -99,6 +58,16 @@ public class CustomCapabilitiesMatcherTest {
                 CapabilityType.APPLICATION_NAME, "A",
                 CapabilityType.VERSION, "8.5.100.7");
 
+        Map<String, Object> tl3 = ImmutableMap.of(
+                CapabilityType.VERSION, "v1.2674.rc1",
+                CapabilityType.PLATFORM_NAME, "windows",
+                CapabilityType.BROWSER_NAME, "chrome");
+
+        Map<String, Object> tl4 = ImmutableMap.of(
+                CapabilityType.VERSION, "1.2674",
+                CapabilityType.PLATFORM_NAME, "Windows",
+                CapabilityType.BROWSER_NAME, "chrome");
+
         assertTrue(matcher.matches(tl, tl));
         assertFalse(matcher.matches(tl, tl2));
         assertTrue(matcher.matches(tl2, tl));
@@ -108,6 +77,13 @@ public class CustomCapabilitiesMatcherTest {
         assertFalse(matcher.matches(firefox, firefox2));
         assertFalse(matcher.matches(firefox2, firefox));
         assertTrue(matcher.matches(firefox2, firefox2));
+
+        assertTrue(matcher.matches(tl3, tl4));
+        assertTrue(matcher.matches(tl4, tl3));
+        assertFalse(matcher.matches(tl3, tl));
+        assertFalse(matcher.matches(tl3, tl2));
+        assertFalse(matcher.matches(tl4, tl2));
+        assertFalse(matcher.matches(tl4, tl));
 
         assertFalse(matcher.matches(tl, null));
         assertFalse(matcher.matches(null, null));
@@ -167,8 +143,6 @@ public class CustomCapabilitiesMatcherTest {
 
     @Test
     public void versionTests() {
-
-        CustomCapabilitiesMatcher matcher = new CustomCapabilitiesMatcher();
 
         assertTrue(matcher.matches(ImmutableMap.of(CapabilityType.VERSION, "50"),
                 ImmutableMap.of(CapabilityType.VERSION, "50")));
@@ -252,18 +226,6 @@ public class CustomCapabilitiesMatcherTest {
 
         assertFalse(matcher.matches(tpNode, requested));
         assertTrue(matcher.matches(regularNode, requested));
-    }
-
-    @Test
-    public void shouldMatchWhenRequestedHasDeprecatedPlatformCapability() {
-        Map<String, Object> requested = new FirefoxOptions().asMap();
-        requested.put(CapabilityType.PLATFORM_NAME, Platform.ANY);
-
-        Map<String, Object> node = new HashMap<>();
-        node.put(CapabilityType.BROWSER_NAME, BrowserType.FIREFOX);
-        node.put(CapabilityType.PLATFORM_NAME, Platform.LINUX);
-
-        assertTrue(matcher.matches(node, requested));
     }
 
     @Test
