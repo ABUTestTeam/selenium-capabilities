@@ -27,9 +27,7 @@ import java.util.Optional;
 
 /**
  * <p>Compares the platform fields in the provided and desired capabilities. This can match the platform version if
- * defined within the platform field (i.e. platform=Win7. However on deprecation of this, the preferred approach
- * would be platformName=Windows, platformVersion=7.</p>
- * TODO check above statement about preferred approach
+ * defined within the platform field (i.e. platform=Win7.</p>
  *
  * <p>The {@link #extractPlatform(Object)} extracts the core platform from the provided string. See {@link Platform}
  *  for more details about how this is done.</p>
@@ -44,24 +42,24 @@ public class PlatformValidator implements Validator {
     @Override
     public Boolean apply(Map<String, Object> providedCapabilities, Map<String, Object> desiredCapabilities) {
 
-        Object requested = Optional.ofNullable(desiredCapabilities.get(CapabilityType.PLATFORM))
-                .orElse(desiredCapabilities.get(CapabilityType.PLATFORM_NAME));
+        Object provided = providedCapabilities.get(CapabilityType.PLATFORM_NAME);
 
-        if (CapabilityHelper.anything(requested)) {
+        if (CapabilityHelper.anything(desiredCapabilities.get(CapabilityType.PLATFORM_NAME))) {
             return true;
         }
 
-        Object provided = Optional.ofNullable(providedCapabilities.get(CapabilityType.PLATFORM))
-                .orElse(providedCapabilities.get(CapabilityType.PLATFORM_NAME));
+        Object desired = desiredCapabilities.get(CapabilityType.PLATFORM_NAME);
 
-        Platform requestedPlatform = extractPlatform(requested);
+        Platform desiredPlatform = extractPlatform(desiredCapabilities.get(CapabilityType.PLATFORM_NAME));
 
-        if (requestedPlatform != null) {
-            Platform providedPlatform = extractPlatform(provided);
-            return providedPlatform != null && providedPlatform.is(requestedPlatform);
+        if (desiredPlatform != null) {
+
+            Platform providedPlatform = extractPlatform(providedCapabilities.get(CapabilityType.PLATFORM_NAME));
+
+            return providedPlatform != null && providedPlatform.is(desiredPlatform);
         }
 
-        return provided != null && Objects.equals(requested.toString(), provided.toString());
+        return provided != null && Objects.equals(desired.toString(), provided.toString());
     }
 
     /**

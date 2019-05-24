@@ -51,24 +51,8 @@ public class PlatformValidatorTest {
     @Test
     public void testDifferentPlatform(){
 
-        System.err.println("PLATFORM: " +  CapabilityType.PLATFORM);
-        System.err.println("VERSION: " +  CapabilityType.VERSION);
-        System.err.println("PLATFORM NAME: " + CapabilityType.PLATFORM_NAME);
-        System.err.println("BROWSER NAME: " + CapabilityType.BROWSER_NAME);
-        System.err.println("BROWSER VERSION: " + CapabilityType.BROWSER_VERSION);
-        System.err.println("Platforms: "
-                + Platform.YOSEMITE + " "
-                + Platform.WINDOWS + " "
-                + Platform.MAC + " "
-                + Platform.WIN8 + " "
-                + Platform.WIN8_1 + " "
-                + Platform.WIN10 + " "
-                + Platform.LINUX + " "
-                + Platform.MAVERICKS + " "
-                + Platform.VISTA + " ");
-
-        providedCapabilities.put(CapabilityType.PLATFORM, "Win7");
-        requestedCapabilities.put(CapabilityType.PLATFORM, "windows" );
+        providedCapabilities.put(CapabilityType.PLATFORM_NAME, "Win7");
+        requestedCapabilities.put(CapabilityType.PLATFORM_NAME, "windows" );
 
         PlatformValidator validator = new PlatformValidator();
 
