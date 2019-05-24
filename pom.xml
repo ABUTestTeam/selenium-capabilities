@@ -81,6 +81,12 @@
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
         </dependency>
+
+        <!-- Appium libraries for webdriver -->
+        <dependency>
+            <groupId>io.appium</groupId>
+            <artifactId>java-client</artifactId>
+        </dependency>
     </dependencies>
 
     <dependencyManagement>
@@ -105,6 +111,13 @@
                 <groupId>org.seleniumhq.selenium</groupId>
                 <artifactId>selenium-java</artifactId>
                 <version>3.141.59</version>
+            </dependency>
+
+            <!-- Appium libraries for webdriver -->
+            <dependency>
+                <groupId>io.appium</groupId>
+                <artifactId>java-client</artifactId>
+                <version>7.0.0</version>
             </dependency>
 
         </dependencies>

@@ -23,7 +23,6 @@ import org.openqa.selenium.remote.CapabilityType;
 
 import java.util.Map;
 import java.util.Objects;
-import java.util.Optional;
 
 /**
  * <p>Compares the platform fields in the provided and desired capabilities. This can match the platform version if
@@ -70,7 +69,7 @@ public class PlatformValidator implements Validator {
      *
      * @return the parsed version of the {@link Platform} for comparison.
      */
-    private Platform extractPlatform(Object o) {
+     static Platform extractPlatform(Object o) {
 
         if (o == null) {
             return null;

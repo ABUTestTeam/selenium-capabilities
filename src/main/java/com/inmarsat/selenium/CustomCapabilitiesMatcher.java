@@ -17,6 +17,7 @@
 package com.inmarsat.selenium;
 
 import com.inmarsat.selenium.validation.*;
+import io.appium.java_client.remote.MobileCapabilityType;
 import org.openqa.grid.internal.utils.CapabilityMatcher;
 import org.openqa.selenium.remote.CapabilityType;
 
@@ -58,8 +59,10 @@ public class CustomCapabilitiesMatcher implements CapabilityMatcher {
             new FirefoxSpecificValidator(),
             new PlatformValidator(),
             new VersionValidator(CapabilityType.VERSION),
+            new VersionValidator(MobileCapabilityType.PLATFORM_VERSION),
             new SafariSpecificValidator(),
-            new SimplePropertyValidator(CapabilityType.APPLICATION_NAME)
+            new SimplePropertyValidator(CapabilityType.APPLICATION_NAME),
+            new AppiumPropertyValidator(MobileCapabilityType.UDID)
         ));
     }
 

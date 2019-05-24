@@ -18,6 +18,7 @@ package com.inmarsat.selenium;
 
 
 import com.google.common.collect.ImmutableMap;
+import io.appium.java_client.remote.MobileCapabilityType;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
@@ -59,12 +60,12 @@ public class CustomCapabilitiesMatcherTest {
                 CapabilityType.VERSION, "8.5.100.7");
 
         Map<String, Object> tl3 = ImmutableMap.of(
-                CapabilityType.VERSION, "v1.2674.rc1",
+                MobileCapabilityType.PLATFORM_VERSION, "v1.2674.rc1",
                 CapabilityType.PLATFORM_NAME, "windows",
                 CapabilityType.BROWSER_NAME, "chrome");
 
         Map<String, Object> tl4 = ImmutableMap.of(
-                CapabilityType.VERSION, "1.2674",
+                MobileCapabilityType.PLATFORM_VERSION, "1.2674",
                 CapabilityType.PLATFORM_NAME, "Windows",
                 CapabilityType.BROWSER_NAME, "chrome");
 
@@ -118,11 +119,11 @@ public class CustomCapabilitiesMatcherTest {
 
     @Test
     public void unknownPlatformMatchingTest() {
-        Map<String, Object> requested = ImmutableMap.of(CapabilityType.PLATFORM_NAME, "ms-dos");
+        Map<String, Object> requested = ImmutableMap.of(CapabilityType.PLATFORM_NAME, "windows");
 
-        assertTrue(matcher.matches(ImmutableMap.of(CapabilityType.PLATFORM_NAME, "ms-dos"), requested));
+        assertTrue(matcher.matches(ImmutableMap.of(CapabilityType.PLATFORM_NAME, "windows"), requested));
 
-        assertFalse(matcher.matches(ImmutableMap.of(CapabilityType.PLATFORM_NAME, "windows"), requested));
+        assertFalse(matcher.matches(ImmutableMap.of(CapabilityType.PLATFORM_NAME, "ms-dos"), requested));
         assertFalse(matcher.matches(ImmutableMap.of(CapabilityType.PLATFORM_NAME, "PS/2"), requested));
     }
 
