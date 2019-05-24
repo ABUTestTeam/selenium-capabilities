@@ -217,24 +217,27 @@ public class CustomCapabilitiesMatcherTest {
 
     @Test
     public void versionTests() {
+
         CustomCapabilitiesMatcher matcher = new CustomCapabilitiesMatcher();
 
         assertTrue(matcher.matches(ImmutableMap.of(CapabilityType.VERSION, "50"),
                 ImmutableMap.of(CapabilityType.VERSION, "50")));
-        assertTrue(matcher.matches(ImmutableMap.of(CapabilityType.VERSION, "50"),
-                ImmutableMap.of(CapabilityType.BROWSER_VERSION, "50")));
-        assertTrue(matcher.matches(ImmutableMap.of(CapabilityType.BROWSER_VERSION, "50"),
+        assertTrue(matcher.matches(ImmutableMap.of(CapabilityType.VERSION, "50.0.1"),
                 ImmutableMap.of(CapabilityType.VERSION, "50")));
-        assertTrue(matcher.matches(ImmutableMap.of(CapabilityType.BROWSER_VERSION, "50"),
-                ImmutableMap.of(CapabilityType.BROWSER_VERSION, "50")));
+
+        assertTrue(matcher.matches(ImmutableMap.of(CapabilityType.BROWSER_VERSION, "50.1"),
+                ImmutableMap.of(CapabilityType.BROWSER_VERSION, "50.1")));
+        assertTrue(matcher.matches(ImmutableMap.of(CapabilityType.BROWSER_VERSION, "v50"),
+                ImmutableMap.of(CapabilityType.BROWSER_VERSION, "version 50")));
 
         assertFalse(matcher.matches(ImmutableMap.of(CapabilityType.VERSION, "50"),
                 ImmutableMap.of(CapabilityType.VERSION, "45")));
-        assertFalse(matcher.matches(ImmutableMap.of(CapabilityType.VERSION, "50"),
-                ImmutableMap.of(CapabilityType.BROWSER_VERSION, "45")));
-        assertFalse(matcher.matches(ImmutableMap.of(CapabilityType.BROWSER_VERSION, "45"),
+        assertFalse(matcher.matches(ImmutableMap.of(CapabilityType.VERSION, "45.0.0.0"),
                 ImmutableMap.of(CapabilityType.VERSION, "50")));
-        assertFalse(matcher.matches(ImmutableMap.of(CapabilityType.BROWSER_VERSION, "45"),
+
+        assertFalse(matcher.matches(ImmutableMap.of(CapabilityType.BROWSER_VERSION, "50.0"),
+                ImmutableMap.of(CapabilityType.BROWSER_VERSION, "v45")));
+        assertFalse(matcher.matches(ImmutableMap.of(CapabilityType.BROWSER_VERSION, "version 45"),
                 ImmutableMap.of(CapabilityType.BROWSER_VERSION, "50")));
     }
 

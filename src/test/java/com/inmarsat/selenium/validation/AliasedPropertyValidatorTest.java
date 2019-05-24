@@ -102,13 +102,4 @@ public class AliasedPropertyValidatorTest {
         assertFalse(validator.apply(providedCapabilities, requestedCapabilities));
     }
 
-    @Test
-    public void testOneMatchOneNotMatch(){
-        requestedCapabilities.put(BROWSER_NAME, "chrome");
-        requestedCapabilities.put(BROWSER_VERSION, "00");
-
-        AliasedPropertyValidator validator = new AliasedPropertyValidator(BROWSER_NAME, BROWSER_VERSION);
-
-        assertFalse(validator.apply(providedCapabilities, requestedCapabilities));
-    }
 }

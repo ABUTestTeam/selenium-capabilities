@@ -37,15 +37,14 @@ import static org.openqa.selenium.remote.CapabilityType.BROWSER_NAME;
  * {@link Validator} pattern. The following validators are registered in this capabilities matcher:</p>
  *
  * <ul>
- *     <li>{@link AliasedPropertyValidator#AliasedPropertyValidator(String...)}</li>
+ *     <li>{@link AliasedPropertyValidator#AliasedPropertyValidator(String...)} {@link CapabilityType#BROWSER_NAME}</li>
+ *     <li>{@link VersionValidator#VersionValidator(String)} {@link CapabilityType#BROWSER_VERSION}</li>
  *     <li>{@link FirefoxSpecificValidator}</li>
  *     <li>{@link PlatformValidator}</li>
+ *     <li>{@link VersionValidator#VersionValidator(String)} {@link CapabilityType#VERSION}</li>
  *     <li>{@link SafariSpecificValidator}</li>
  *     <li>{@link SimplePropertyValidator#SimplePropertyValidator(String...)}</li>
  * </ul>
- *
- * They are implementing validators (private final),,, rebuild based on work done by selenium
- *
  */
 public class CustomCapabilitiesMatcher implements CapabilityMatcher {
 
@@ -53,9 +52,10 @@ public class CustomCapabilitiesMatcher implements CapabilityMatcher {
     {
         validators.addAll(Arrays.asList(
             new AliasedPropertyValidator(BROWSER_NAME, "browser"),
-            new AliasedPropertyValidator(CapabilityType.BROWSER_VERSION, CapabilityType.VERSION),
+            new VersionValidator(CapabilityType.BROWSER_VERSION),
             new FirefoxSpecificValidator(),
             new PlatformValidator(),
+            new VersionValidator(CapabilityType.VERSION),
             new SafariSpecificValidator(),
             new SimplePropertyValidator(CapabilityType.APPLICATION_NAME)
         ));
