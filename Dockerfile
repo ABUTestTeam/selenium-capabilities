@@ -35,21 +35,12 @@ ENV GRID_HUB_PORT 4444
 # As string, maps to "host"
 ENV GRID_HUB_HOST "0.0.0.0"
  
-COPY generate_config \
-    start-selenium-hub.sh \
+COPY docker/generate_config \
+    docker/start-selenium-hub.sh \
     /opt/bin/
 
-COPY selenium-hub.conf /etc/supervisor/conf.d/
+COPY docker/selenium-hub.conf /etc/supervisor/conf.d/
 
-COPY selenium-capabilities-0.7.0.jar /opt/selenium/selenium-capabilities.jar
+COPY target/selenium-capabilities-0.7.0.jar /opt/selenium/selenium-capabilities.jar
 
-RUN /opt/bin/generate_config > /opt/selenium/config.json 
-
-USER root
-
-RUN  mkdir -p /opt/selenium /var/run/supervisor /var/log/supervisor \
-  && chmod -R 777 /opt/selenium /var/run/supervisor /var/log/supervisor /etc/passwd \
-  && chgrp -R 0 /opt/selenium ${HOME} /var/run/supervisor /var/log/supervisor \
-  && chmod -R g=u /opt/selenium ${HOME} /var/run/supervisor /var/log/supervisor
-
-USER seluser
+RUN /opt/bin/generate_config > /opt/selenium/config.json
