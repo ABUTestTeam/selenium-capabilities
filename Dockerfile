@@ -36,8 +36,8 @@ ENV GRID_HUB_PORT 4444
 ENV GRID_HUB_HOST "0.0.0.0"
  
 COPY docker/generate_config \
-    docker/start-selenium-hub.sh \
-    /opt/bin/
+     docker/start-selenium-hub.sh \
+     /opt/bin/
 
 COPY docker/selenium-hub.conf /etc/supervisor/conf.d/
 

@@ -22,11 +22,21 @@ version, hence the `<release>` tag is set to 8. Will work with JDK 8+.
     to edit this you need to adapt the 'generate_config' file and specify your own class-path to the CapabilityMatcher 
     to use.
     
-    To build the Dockerfile, navigate to `${project.baseDir}/docker` execute 
+    To build the Dockerfile, navigate to the project base directory, where the Dockerfile is and execute: 
     
     `docker build -f Dockerfile -t inmarsat/selenium-capabilities:${version} -t inmarsat/selenium-capabilities:latest .`
     
-    for deploying to docker registry please refer to docker documentation. 
+    For deploying to docker registry please refer to docker documentation. 
+    
+    To see the newly created docker images, that can be used within docker-compose and docker-machine, `docker images`.
+    You will see two tags, inmarsat/selenium-capabilities:x.x.x and inmarsat/selenium-capabilities:latest.
+    
+    This docker image will work identically to the 
+    [selenium/hub](https://github.com/SeleniumHQ/docker-selenium/tree/master/Hub) docker image, using the 
+    `CustomCapabilitiesMatcher` provided.
+    
+    You can adjust the version of the grid within the Dockerfile, specifying the exact version as the base 
+    image. This has only been tested working for selenium/base:3.141.59-neon.
     
  ## Use of Grid properties Desired and Provided
  
