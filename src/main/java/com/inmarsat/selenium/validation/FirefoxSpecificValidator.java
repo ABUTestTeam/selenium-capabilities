@@ -28,6 +28,8 @@ import static org.openqa.selenium.remote.CapabilityType.BROWSER_NAME;
  */
 public class FirefoxSpecificValidator implements Validator {
 
+    private static final String MARIONETTE = "marionette";
+
     @Override
     public Boolean apply(Map<String, Object> providedCapabilities, Map<String, Object> desiredCapabilities) {
 
@@ -35,15 +37,15 @@ public class FirefoxSpecificValidator implements Validator {
             return true;
         }
 
-        if (desiredCapabilities.get("marionette") != null &&
-                !Boolean.valueOf(desiredCapabilities.get("marionette").toString())) {
+        if (desiredCapabilities.get(MARIONETTE) != null &&
+                !Boolean.valueOf(desiredCapabilities.get(MARIONETTE).toString())) {
 
-            return providedCapabilities.get("marionette") != null &&
-                    !Boolean.valueOf(providedCapabilities.get("marionette").toString());
+            return providedCapabilities.get(MARIONETTE) != null &&
+                    !Boolean.valueOf(providedCapabilities.get(MARIONETTE).toString());
         } else {
 
-            return providedCapabilities.get("marionette") == null ||
-                    Boolean.valueOf(providedCapabilities.get("marionette").toString());
+            return providedCapabilities.get(MARIONETTE) == null ||
+                    Boolean.valueOf(providedCapabilities.get(MARIONETTE).toString());
         }
     }
 }

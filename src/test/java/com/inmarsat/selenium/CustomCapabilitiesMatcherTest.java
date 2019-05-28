@@ -35,6 +35,8 @@ import static org.testng.Assert.assertTrue;
 
 public class CustomCapabilitiesMatcherTest {
 
+    private static final String WINDOWS = "windows";
+
     private CustomCapabilitiesMatcher matcher = new CustomCapabilitiesMatcher();
 
     @Test
@@ -61,7 +63,7 @@ public class CustomCapabilitiesMatcherTest {
 
         Map<String, Object> tl3 = ImmutableMap.of(
                 MobileCapabilityType.PLATFORM_VERSION, "v1.2674.rc1",
-                CapabilityType.PLATFORM_NAME, "windows",
+                CapabilityType.PLATFORM_NAME, WINDOWS,
                 CapabilityType.BROWSER_NAME, "chrome");
 
         Map<String, Object> tl4 = ImmutableMap.of(
@@ -98,8 +100,8 @@ public class CustomCapabilitiesMatcherTest {
 
         assertTrue(matcher.matches(ImmutableMap.of(CapabilityType.PLATFORM_NAME, "WINDOWS"), requested));
         assertTrue(matcher.matches(ImmutableMap.of(CapabilityType.PLATFORM_NAME, "xp"), requested));
-        assertTrue(matcher.matches(ImmutableMap.of(CapabilityType.PLATFORM_NAME, "windows VISTA"), requested));
-        assertTrue(matcher.matches(ImmutableMap.of(CapabilityType.PLATFORM_NAME, "windows 7"), requested));
+        assertTrue(matcher.matches(ImmutableMap.of(CapabilityType.PLATFORM_NAME, WINDOWS + " VISTA"), requested));
+        assertTrue(matcher.matches(ImmutableMap.of(CapabilityType.PLATFORM_NAME, WINDOWS + " 7"), requested));
 
         assertFalse(matcher.matches(ImmutableMap.of(CapabilityType.PLATFORM_NAME, "linux"), requested));
     }
@@ -111,17 +113,17 @@ public class CustomCapabilitiesMatcherTest {
         assertTrue(matcher.matches(ImmutableMap.of(CapabilityType.PLATFORM_NAME, "xp"), requested));
 
         assertFalse(matcher.matches(ImmutableMap.of(CapabilityType.PLATFORM_NAME, "WINDOWS"), requested));
-        assertFalse(matcher.matches(ImmutableMap.of(CapabilityType.PLATFORM_NAME, "windows VISTA"), requested));
-        assertFalse(matcher.matches(ImmutableMap.of(CapabilityType.PLATFORM_NAME, "windows 7"), requested));
+        assertFalse(matcher.matches(ImmutableMap.of(CapabilityType.PLATFORM_NAME, WINDOWS + " VISTA"), requested));
+        assertFalse(matcher.matches(ImmutableMap.of(CapabilityType.PLATFORM_NAME, WINDOWS + " 7"), requested));
 
         assertFalse(matcher.matches(ImmutableMap.of(CapabilityType.PLATFORM_NAME, "linux"), requested));
     }
 
     @Test
     public void unknownPlatformMatchingTest() {
-        Map<String, Object> requested = ImmutableMap.of(CapabilityType.PLATFORM_NAME, "windows");
+        Map<String, Object> requested = ImmutableMap.of(CapabilityType.PLATFORM_NAME, WINDOWS);
 
-        assertTrue(matcher.matches(ImmutableMap.of(CapabilityType.PLATFORM_NAME, "windows"), requested));
+        assertTrue(matcher.matches(ImmutableMap.of(CapabilityType.PLATFORM_NAME, WINDOWS), requested));
 
         assertFalse(matcher.matches(ImmutableMap.of(CapabilityType.PLATFORM_NAME, "ms-dos"), requested));
         assertFalse(matcher.matches(ImmutableMap.of(CapabilityType.PLATFORM_NAME, "PS/2"), requested));
@@ -240,5 +242,4 @@ public class CustomCapabilitiesMatcherTest {
 
         assertTrue(matcher.matches(node, requested));
     }
-
 }

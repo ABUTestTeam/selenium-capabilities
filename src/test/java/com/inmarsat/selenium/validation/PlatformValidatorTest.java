@@ -16,13 +16,9 @@
  */
 package com.inmarsat.selenium.validation;
 
-import org.openqa.selenium.Platform;
 import org.openqa.selenium.remote.CapabilityType;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import static org.testng.Assert.assertTrue;
 
@@ -34,18 +30,13 @@ import static org.testng.Assert.assertTrue;
  * (new AliasedPropertyValidator(CapabilityType.BROWSER_VERSION, CapabilityType.VERSION))
  *
  */
-public class PlatformValidatorTest {
-
-    private Map<String, Object> providedCapabilities;
-
-    private Map<String, Object> requestedCapabilities;
-
+public class PlatformValidatorTest extends AbstractValidatorTest {
 
     @BeforeMethod
     public void setUp() {
 
-        providedCapabilities = new HashMap<>();
-        requestedCapabilities = new HashMap<>();
+        setUpValidatorTest();
+        validator = new PlatformValidator();
     }
 
     @Test
@@ -54,8 +45,11 @@ public class PlatformValidatorTest {
         providedCapabilities.put(CapabilityType.PLATFORM_NAME, "Win7");
         requestedCapabilities.put(CapabilityType.PLATFORM_NAME, "windows" );
 
-        PlatformValidator validator = new PlatformValidator();
-
         assertTrue(validator.apply(providedCapabilities, requestedCapabilities));
+    }
+
+    @Test
+    public void testExtractPlatform(){
+        // EMPTY
     }
 }

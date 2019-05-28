@@ -19,26 +19,17 @@ package com.inmarsat.selenium.validation;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import static org.openqa.selenium.remote.CapabilityType.BROWSER_NAME;
 import static org.openqa.selenium.remote.CapabilityType.BROWSER_VERSION;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
-public class AliasedPropertyValidatorTest {
-
-    private Map<String, Object> providedCapabilities;
-
-    private Map<String, Object> requestedCapabilities;
+public class AliasedPropertyValidatorTest extends AbstractValidatorTest {
 
     @BeforeMethod
     public void setUp() {
 
-        providedCapabilities = new HashMap<>();
-        requestedCapabilities = new HashMap<>();
-
+        setUpValidatorTest();
         providedCapabilities.put(BROWSER_NAME, "chrome");
         providedCapabilities.put(BROWSER_VERSION, "73.0");
     }

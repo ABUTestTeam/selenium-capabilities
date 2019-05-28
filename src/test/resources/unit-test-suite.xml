@@ -20,6 +20,8 @@
 
             <class name="com.inmarsat.selenium.validation.AliasedPropertyValidatorTest"/>
 
+            <class name="com.inmarsat.selenium.validation.AppiumPropertyValidatorTest"/>
+
             <class name="com.inmarsat.selenium.validation.FirefoxSpecificValidatorTest"/>
 
             <class name="com.inmarsat.selenium.validation.PlatformValidatorTest"/>
@@ -27,6 +29,8 @@
             <class name="com.inmarsat.selenium.validation.SafariSpecificValidatorTest"/>
 
             <class name="com.inmarsat.selenium.validation.SimplePropertyValidatorTest"/>
+
+            <class name="com.inmarsat.selenium.validation.VersionValidatorTest"/>
 
         </classes>
     </test>

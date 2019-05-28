@@ -12,8 +12,6 @@ import static com.inmarsat.selenium.CapabilityHelper.anything;
  * will return true.</p>
  *
  * <p>This enables the detachment of version and browserVersion so version can be used as platform version.</p>
- *
- * TODO extend to have multiple variations such as appium:platformVersion
  */
 public class VersionValidator implements Validator {
 

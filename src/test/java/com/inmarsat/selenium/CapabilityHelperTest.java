@@ -16,5 +16,13 @@
  */
 package com.inmarsat.selenium;
 
+import org.testng.annotations.Test;
+
 public class CapabilityHelperTest {
+
+    @Test
+    public void testAnything(){
+        // Empty
+    }
+
 }

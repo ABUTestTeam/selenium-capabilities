@@ -16,5 +16,41 @@
  */
 package com.inmarsat.selenium.validation;
 
-public class FirefoxSpecificValidatorTest {
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.remote.BrowserType;
+import org.openqa.selenium.remote.CapabilityType;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertTrue;
+
+public class FirefoxSpecificValidatorTest extends AbstractValidatorTest {
+
+    @BeforeMethod
+    public void setUp(){
+        setUpValidatorTest();
+        validator = new FirefoxSpecificValidator();
+    }
+
+    @Test
+    public void shouldMatchMarionetteFirefoxDriverOnly() {
+
+        Map<String, Object> requested = new FirefoxOptions().asMap();
+
+        Map<String, Object> legacyNode = new HashMap<>();
+
+        legacyNode.put(CapabilityType.BROWSER_NAME, BrowserType.FIREFOX);
+        legacyNode.put(FirefoxDriver.MARIONETTE, false);
+
+        Map<String, Object> mNode = new HashMap<>();
+        mNode.put(CapabilityType.BROWSER_NAME, BrowserType.FIREFOX);
+
+        assertFalse(validator.apply(legacyNode, requested));
+        assertTrue(validator.apply(mNode, requested));
+    }
 }

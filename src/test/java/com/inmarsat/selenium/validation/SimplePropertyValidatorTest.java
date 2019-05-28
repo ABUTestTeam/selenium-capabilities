@@ -16,6 +16,13 @@
  */
 package com.inmarsat.selenium.validation;
 
-public class SimplePropertyValidatorTest {
+import org.testng.annotations.BeforeMethod;
+
+public class SimplePropertyValidatorTest extends AbstractValidatorTest {
+
+    @BeforeMethod
+    public void setUp(){
+        setUpValidatorTest();
+    }
 
 }
