@@ -33,7 +33,7 @@ public class VersionValidatorTest extends AbstractValidatorTest{
 
     @Test
     public void testNullProvided(){
-
+        providedCapabilities.put(CapabilityType.VERSION, null );
         requestedCapabilities.put(CapabilityType.VERSION, "8.1.1267138" );
 
         assertFalse(validator.apply(providedCapabilities, requestedCapabilities));
@@ -43,6 +43,7 @@ public class VersionValidatorTest extends AbstractValidatorTest{
     public void testNullDesired(){
 
         providedCapabilities.put(CapabilityType.VERSION, "8.1.126738" );
+        requestedCapabilities.put(CapabilityType.VERSION, null );
 
         assertTrue(validator.apply(providedCapabilities, requestedCapabilities));
     }
