@@ -43,7 +43,8 @@ public class PlatformValidator implements Validator {
 
         Object provided = providedCapabilities.get(CapabilityType.PLATFORM_NAME);
 
-        if (CapabilityHelper.anything(desiredCapabilities.get(CapabilityType.PLATFORM_NAME))) {
+        if (CapabilityHelper.anything(desiredCapabilities.get(CapabilityType.PLATFORM_NAME)) ||
+                desiredCapabilities.get(CapabilityType.PLATFORM_NAME) == null) {
             return true;
         }
 
