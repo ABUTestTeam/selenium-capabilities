@@ -1,5 +1,20 @@
 # Inmarsat's Custom Capability Matcher
 
+Selenium's 
+[DefaultCapabilityMatcher](https://github.com/SeleniumHQ/selenium/blob/master/java/server/src/org/openqa/grid/internal/utils/DefaultCapabilityMatcher.java) 
+provides basic capability matching on the Grid, matching against `browser`, `browserName`, `browserVersion`, 
+`applicationName`, and `platform`, as well as some capabilities specific to Firefox and Safari.
+
+For this reason, it was not fit-for-purpose when dealing with Android devices, where the `udid` is required
+to run the device, but no selectivity of devices based on the `udid` or `deviceName` is available. The `platform` was 
+compound and now deprecated, leading to having to specify `platformName=WIN8_1` or similar.
+ 
+In this capability matcher we provide additional capability matching to match `platformName` 
+(i.e. Windows/OS X/Linus/Android), and utilise `version` as an additional capability for the platform version i.e. 
+`platformName=android`, `version=8.1` will allow matching based on the platform and version independently. Also,
+it will match based on `udid` when requested. The rest of the functionality of the DefaultCapabilityMatcher works as 
+originally intended.
+
 
 ## Usage 
 
@@ -7,6 +22,7 @@ As selenium standalone executable is built using Java 8, this project also needs
 version, hence the `<release>` tag is set to 8.
 
 ### Command Line
+
 To run using JAVA from the command line, you can use the following statement to add the class path of selenium-capabilities to be accessible within the selenium-server-standalone executable.
 
 `java -cp "/path/to/selenium-server-standalone.jar:/path/to/selenium-capabilities-v0.1.0.jar" org.openqa.grid.selenium.GridLauncherV3 -role hub -hubConfig /path/to/hub-config.json`
