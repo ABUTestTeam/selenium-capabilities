@@ -9,7 +9,7 @@ version, hence the `<release>` tag is set to 8. Will work with JDK 8+.
 ### Command Line
 To run using JAVA from the command line, you can use the following statement to add the class path of selenium-capabilities to be accessible within the selenium-server-standalone executable.
 
-`java -cp "/path/to/selenium-server-standalone.jar:/path/to/selenium-capabilities-v0.7.0.jar" org.openqa.grid.selenium.GridLauncherV3 -role hub -hubConfig /path/to/hub-config.json`
+`java -cp "/path/to/selenium-server-standalone.jar:/path/to/selenium-capabilities-v0.1.0.jar" org.openqa.grid.selenium.GridLauncherV3 -role hub -hubConfig /path/to/hub-config.json`
 
 ### Docker 
 
@@ -31,7 +31,7 @@ To run using JAVA from the command line, you can use the following statement to 
     For deploying to docker registry please refer to docker documentation. 
     
     To see the newly created docker images, that can be used within docker-compose and docker-machine, `docker images`.
-    You will see two tags, inmarsat/selenium-capabilities:x.x.x and inmarsat/selenium-capabilities:latest.
+    You will see two tags, inmarsat/selenium-capabilities:0.1.0 and inmarsat/selenium-capabilities:latest.
     
     This docker image will work identically to the 
     [selenium/hub](https://github.com/SeleniumHQ/docker-selenium/tree/master/Hub) docker image, using the 

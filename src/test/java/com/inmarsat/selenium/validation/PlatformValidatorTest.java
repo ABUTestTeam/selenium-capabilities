@@ -47,9 +47,4 @@ public class PlatformValidatorTest extends AbstractValidatorTest {
 
         assertTrue(validator.apply(providedCapabilities, requestedCapabilities));
     }
-
-    @Test
-    public void testExtractPlatform(){
-        // EMPTY
-    }
 }

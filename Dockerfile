@@ -41,6 +41,6 @@ COPY docker/generate_config \
 
 COPY docker/selenium-hub.conf /etc/supervisor/conf.d/
 
-COPY target/selenium-capabilities-0.7.0.jar /opt/selenium/selenium-capabilities.jar
+COPY target/selenium-capabilities-0.1.0.jar /opt/selenium/selenium-capabilities.jar
 
 RUN /opt/bin/generate_config > /opt/selenium/config.json
