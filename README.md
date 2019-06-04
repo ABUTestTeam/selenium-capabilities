@@ -12,9 +12,6 @@ version, hence the `<release>` tag is set to 8. Will work with JDK 8+.
     
     Build with Maven `mvn clean package`, will clean, compile test and package into jar within the target folder. This 
     enough to use to build the docker image with the custom capabilties matcher in.
-    
-    `-DbuildNumber=0` specifes incremental numbering of commit versioning, i.e. 0.7.1254, where 1254 is the commit
-    based numbering.
 
 2) Build the Dockerfile
 
