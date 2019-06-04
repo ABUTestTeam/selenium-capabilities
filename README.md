@@ -26,7 +26,7 @@ To run using JAVA from the command line, you can use the following statement to 
     
     To build the Dockerfile, navigate to the project base directory, where the Dockerfile is and execute: 
     
-    `docker build -f Dockerfile -t inmarsat/selenium-capabilities:${version} -t inmarsat/selenium-capabilities:latest .`
+    `docker build -f Dockerfile -t inmarsat/selenium-capabilities:0.1.0 -t inmarsat/selenium-capabilities:latest .`
     
     For deploying to docker registry please refer to docker documentation. 
     
