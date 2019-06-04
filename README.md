@@ -6,6 +6,11 @@
 As selenium standalone executable is built using Java 8, this project also needs to be compiled at the same
 version, hence the `<release>` tag is set to 8. Will work with JDK 8+.
 
+### Command Line
+To run using JAVA from the command line, you can use the following statement to add the class path of selenium-capabilities to be accessible within the selenium-server-standalone executable.
+
+`java -cp "/path/to/selenium-server-standalone.jar:/path/to/selenium-capabilities-v0.7.0.jar" org.openqa.grid.selenium.GridLauncherV3 -role hub -hubConfig /path/to/hub-config.json`
+
 ### Docker 
 
 1) Build the project
