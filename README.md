@@ -4,7 +4,7 @@
 ## Usage 
 
 As selenium standalone executable is built using Java 8, this project also needs to be compiled at the same
-version, hence the `<release>` tag is set to 8. Will work with JDK 8+.
+version, hence the `<release>` tag is set to 8.
 
 ### Command Line
 To run using JAVA from the command line, you can use the following statement to add the class path of selenium-capabilities to be accessible within the selenium-server-standalone executable.
@@ -57,7 +57,7 @@ To run using JAVA from the command line, you can use the following statement to 
  
  Added Features:
  
- * Handles versions by making them well-formatted "version 2183.123.2" is eq to "2183.123".
+ * Handles versions by making them well-formatted and easy to compare, where `"version 2183.123.2"` is equal to `"2183.123"`.
 
  Breaking changes between `DefaultCapabilityMatcher` and `CustomCapabilityMatcher`:
  * `"version"` no longer refers to browserVersion and is instead used for platform version separation.
