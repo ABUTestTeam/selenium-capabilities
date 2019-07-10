@@ -44,22 +44,6 @@
                 </configuration>
             </plugin>
 
-            <!-- Surefire plugin for TestNG -->
-            <!-- Configuration set in suiteXMLFile -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <configuration>
-                    <!-- surefireArgLine is injected by JaCoCo plugin, and should not be
-                    defined elsewhere in the POM -->
-                    <argLine>${surefireArgLine} --illegal-access=permit</argLine>
-                    <suiteXmlFiles>
-                        <!-- by default all test in unit-test-suite are tests using mocks -->
-                        <suiteXmlFile>src/test/resources/unit-test-suite.xml</suiteXmlFile>
-                    </suiteXmlFiles>
-                </configuration>
-            </plugin>
-
             <!-- Code coverage plugin -->
             <plugin>
                 <groupId>org.jacoco</groupId>
@@ -77,7 +61,26 @@
                             <propertyName>surefireArgLine</propertyName>
                         </configuration>
                     </execution>
-                     <execution>
+                    <execution>
+                        <id>merge-results</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>merge</goal>
+                        </goals>
+                        <configuration>
+                            <skip>${skipCodeCoverage}</skip>
+                            <fileSets>
+                                <fileSet>
+                                    <directory>${project.build.directory}/coverage</directory>
+                                    <includes>
+                                        <include>*.exec</include>
+                                    </includes>
+                                </fileSet>
+                            </fileSets>
+                            <destFile>${project.build.directory}/coverage/jacoco-aggregate-results.exec</destFile>
+                        </configuration>
+                    </execution>
+                    <execution>
                         <id>post-merge-report</id>
                         <phase>verify</phase>
                         <goals>
@@ -85,13 +88,28 @@
                         </goals>
                         <configuration>
                             <skip>${skipCodeCoverage}</skip>
-                            <dataFile>${project.build.directory}/coverage/jacoco-ut.exec</dataFile>
+                            <dataFile>${project.build.directory}/coverage/jacoco-aggregate-results.exec</dataFile>
                             <outputDirectory>${project.reporting.outputDirectory}/jacoco-aggregate</outputDirectory>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
 
+            <!-- Surefire plugin for TestNG -->
+            <!-- Configuration set in suiteXMLFile -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <!-- surefireArgLine is injected by JaCoCo plugin, and should not be
+                    defined elsewhere in the POM -->
+                    <argLine>${surefireArgLine} --illegal-access=permit</argLine>
+                    <suiteXmlFiles>
+                        <!-- by default all test in unit-test-suite are tests using mocks -->
+                        <suiteXmlFile>src/test/resources/unit-test-suite.xml</suiteXmlFile>
+                    </suiteXmlFiles>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
