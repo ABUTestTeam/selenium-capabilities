@@ -66,7 +66,7 @@ stage("Code Review and Coverage Report Generation") {
                     }
 
                     slackSend color: getMessageColour(), message: "v${fullVersionNumber} code code review completed " +
-                            "(<http://192.168.34.68:9000/dashboard?id=CAPABILITIES_MATCHER|link>)"
+                            "(<http://192.168.34.68:9000/dashboard?id=SELENIUM_CAPABILITIES|link>)"
 
                 } catch (exception) {
 
