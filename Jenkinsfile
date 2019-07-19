@@ -133,7 +133,7 @@ stage("Create build artifact after successful tests") {
                     try {
                         echo "Deploying artifacts to Apache Archiva"
 
-                        deployToArchiva("selenium-capabilities", "internal", fullVersionNumber)
+                        deployToNexus("selenium-capabilities", "maven-releases", fullVersionNumber)
 
                         slackSend color: getMessageColour(), message: "v${fullVersionNumber} of the Selenium Capabilities has been successfully deployed to Archiva " +
                                 "(<http://192.168.34.66:8080/#artifact/com.inmarsat/selenium-capabilities/${fullVersionNumber}|link>)"
