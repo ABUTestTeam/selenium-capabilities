@@ -66,7 +66,7 @@ stage("Code Review and Coverage Report Generation") {
                     }
 
                     slackSend color: getMessageColour(), message: "v${fullVersionNumber} code code review completed " +
-                            "(<http://192.168.34.68:9000/dashboard?id=SELENIUM_CAPABILITIES|link>)"
+                            "(<http://ldn-docker-02.abu.inmarsat.com:9000/dashboard?id=SELENIUM_CAPABILITIES|link>)"
 
                 } catch (exception) {
 
@@ -98,12 +98,12 @@ stage("Quality Gate") {
                 currentBuild.result = 'FAILED'
 
                 slackSend color: getMessageColour(), message: "Build failed as one or more quality requirements" +
-                        "have not been met, check <http://192.168.34.68:9000|SonarQube> for more details."
+                        "have not been met, check <http://ldn-docker-02.abu.inmarsat.com:9000|SonarQube> for more details."
 
                 error("Failed because the quality requirements have not been met")
             } else {
                 slackSend color: getMessageColour(), message: "<${env.RUN_DISPLAY_URL}|Link to Build> - Quality Checks have passed, " +
-                        "check <http://192.168.34.68:9000|SonarQube> for more details."
+                        "check <http://ldn-docker-02.abu.inmarsat.com:9000|SonarQube> for more details."
             }
         }
     } catch (org.jenkinsci.plugins.workflow.steps.FlowInterruptedException e) {
@@ -136,7 +136,7 @@ stage("Create build artifact after successful tests") {
                         deployToNexus("selenium-capabilities", "maven-releases", fullVersionNumber)
 
                         slackSend color: getMessageColour(), message: "v${fullVersionNumber} of the Selenium Capabilities has been successfully deployed to Archiva " +
-                                "(<http://192.168.34.66:8080/#artifact/com.inmarsat/selenium-capabilities/${fullVersionNumber}|link>)"
+                                "(<https://ldn-docker-02.abu.inmarsat.com:8443/#browse/browse:maven-public:com%2Finmarsat%2Fselenium-capabilities%2F${fullVersionNumber}|link>)"
 
                     } catch (exception) {
 
